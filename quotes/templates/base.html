@@ -2,19 +2,19 @@
 <html lang="en">
 <head>
     {% if title %}
-    <title>{{title}} - Article</title>
+    <title>{{title}} - QUOTE</title>
     {% else %}
-    <title>Articles</title>
+    <title>QUOTES</title>
     {% endif %}
   </head>
   <body>
-    <div>Article: <a href="/index">Home</a> << -- >> <a href="/login">Login</a> << -- >> </div>
+    <div>App <b>QUOTES</b> <a href="/">Home</a>____<<>>____<a href="/login">Login</a>____<<>>____</div>
     <hr>
     {% with messages = get_flashed_messages() %}
     {% if messages %}
     <ul>
     {% for message in messages %}
-        <li>{{ message }} </li>
+        <li> {{ message }} </li>
     {% endfor %}
     </ul>
     {% endif %}

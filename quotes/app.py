@@ -1,13 +1,17 @@
 from flask import Flask, render_template, redirect, request, flash, url_for
+from flask_wtf.csrf import CSRFProtect
+from wtforms import Form, BooleanField, StringField, SubmitField, PasswordField
+from wtforms.validators import length, DataRequired, InputRequired, ValidationError
 
-from .forms import LoginForm
 
+# App config
+DEBUG = True
 quotes = Flask(__name__)
-quotes.secret_key = 'lhflkk24hflk24jlfk4l25kfh4lk5hfl45khf'
+csrf = CSRFProtect(quotes)
+quotes.secret_key = '14hj3'
 
 
 @quotes.route('/')
-@quotes.route('/index')
 def index():
     user = {'nickname': 'Man'}
     posts = [
@@ -20,40 +24,31 @@ def index():
             'body': 'Be yourself; everyone else is already taken.'
         }
     ]
-    return render_template("index.html", title='Home', user=user, posts=posts)
+    return render_template('index.html', title='Home', user=user, posts=posts)
+
+
+class LoginForm(Form):
+    login = StringField('Login', validators=[InputRequired(), length(min=3, max=30)])
+    password = PasswordField('Password', validators=[DataRequired(message='Passwords must match')])
+    remember_me = BooleanField('Remember me', default=False)
+    submit = SubmitField('Login')
 
 
 @quotes.route('/login', methods=['GET', 'POST'])
 def login():
-    form = LoginForm()
+    form = LoginForm(request.form)
 
     if request.method == 'POST':
-        if form.validate() == True:
-            # flash('All fields are required.')
-            # ('Login requested for Name="' + form.name.data + '", remember_me=' + str(form.remember_me.data))
-            return render_template('success.html')
-
-        else:
+        if form.validate() is False:
+            flash('All fields are required.')
             return render_template('login.html', title='Sign In', form=form)
-                    # redirect('/index')
-    elif request.method == 'GET':
-        return render_template('login.html', form=form)
+        else:
+            flash('Hello ' + form.login.data + '!')
+            return redirect('/')
+    else:
+        return render_template('login.html', title='Sign In', form=form)
 
 
-
-# @quotes.route('/success')
-# def success():
-#     return 'welcome name'
-#
-# @quotes.route('/login-test', methods=['POST', 'GET'])
-# def login_test():
-#    if request.method == 'POST':
-#       user = request.form['nm']
-#       return redirect(url_for('success', name=user))
-#    else:
-#       user = request.args.get('nm')
-#       return redirect(url_for('success', name=user))
-
-
-if __name__ == '__main__':
-   quotes.run(debug = True)
+@quotes.route('/test')
+def test():
+    return render_template('test.html')

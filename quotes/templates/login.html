@@ -1,18 +1,23 @@
 {% extends "base.html" %}
-
 {% block content %}
-<h1>Sign In</h1>
-<input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
-<form action="" method="post" name="login">
-    <p>
-        Please enter your Name:<br>
-        {{form.name(size=25)}}
-        {% for error in form.errors.name %}
-        <span style="color: red;">[{{error}}]</span>
-        {% endfor %}<br>
-    </p>
-    <p>Please select gender:{{form.gender}}<br></p>
-    <p>{{form.remember_me}} Remember Me</p>
-    <p><input type="submit" value="Sign In"></p>
+<h2 style = "text-align: left;">Sign In</h2>
+{% for error in form.errors.name %}
+    <div><span style="color: red;">[{{error}}]</span></div>
+{% endfor %}
+<form method="post" >
+    <fieldset>
+        <legend>Sign In Form</legend>
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+            <div style = font-size:18px;>
+                {{ form.login.label }}
+                {{ form.login(size=20) }}<br><br>
+                {{ form.password.label }}
+                {{ form.password }}<br><br>
+                {{ form.remember_me.label }}
+                {{ form.remember_me }}<br><br>
+                {{ form.submit.label }}
+                {{ form.submit }}
+            </div>
+    </fieldset>
 </form>
 {% endblock %}

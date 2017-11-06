@@ -1,0 +1,7 @@
+set FLASK_APP=quotes/app.py     # name & path to Your App
+set FLASK_DEBUG=1               # Debug & Reload enabled
+flask run --no-reload           # The Reloader disabled
+flask run                       # Run Your App
+
+## !! Environment variables (On Windows use SET instead of EXPORT)
+## export FLASK_APP=/path/to/hello.py

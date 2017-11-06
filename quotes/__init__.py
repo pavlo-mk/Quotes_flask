@@ -3,6 +3,6 @@ from flask_sqlalchemy import SQLAlchemy
 
 quotes = Flask(__name__)
 quotes.config.from_object('base')
-db = SQLAlchemy(quotes)
+# db = SQLAlchemy(quotes)
 
-from . import app, models
+from . import app
