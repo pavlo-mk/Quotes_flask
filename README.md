@@ -9,7 +9,7 @@ Quotes is a simple FLASK applications.
 
 ```
 export FLASK_APP=quotes/app.py  # path to Your App
-export FLASK_DEBUG=1			# Debug & Reload enabled
+export FLASK_DEBUG=1		# Debug & Reload enabled
 flask run                       # Run Your App
 
 # Environment variables (On Windows use SET instead of EXPORT)
@@ -19,9 +19,9 @@ flask run                       # Run Your App
 
 ## Authors
 
-* **pvpasha** - *Initial work* - [PV_PASHA](https://github.com/pvpasha)
+* **pvpasha** - *Initial work*
 
 ## License
 
 This project is licensed under the BSD License - see the 
-[LICENSE.md](LICENSE.md) file for details
+[LICENSE](LICENSE) file for details
